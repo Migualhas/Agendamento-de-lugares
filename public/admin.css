@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+}
+table, th, td {
+    border: 1px solid #ddd;
+    border-collapse: collapse;
+    padding: 8px;
+}
+th {
+    background-color: #f4f4f4;
+}
+button {
+    margin-top: 10px;
+}

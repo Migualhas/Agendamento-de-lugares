@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload de Arquivo Excel</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 15px;
+            background: #5cb85c;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #4cae4c;
+        }
+        .message {
+            margin-top: 20px;
+            color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <h1>Importar Arquivo Excel para Postos</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <label for="file">Selecione o arquivo Excel:</label>
+        <input type="file" id="file" name="file" accept=".xlsx" required>
+        <button type="submit">Enviar</button>
+    </form>
+    <div class="message" id="message"></div>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', function (event) {
+            event.preventDefault(); // Evitar o envio padrão do formulário
+
+            const formData = new FormData(this);
+
+            fetch('/importar-postos', {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Erro ao importar dados.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('message').textContent = data.message;
+                document.getElementById('message').style.color = 'green';
+            })
+            .catch(error => {
+                document.getElementById('message').textContent = error.message;
+                document.getElementById('message').style.color = 'red';
+            });
+        });
+    </script>
+</body>
+</html>

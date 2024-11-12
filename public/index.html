@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Desk</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loading" class="loading">
+        <p>Carregando...</p>
+    </div>
+      
+        <header>
+            <img src="Logo.png" alt="Logo" id="logo">
+            <nav class="dropdown">
+                <button class="dropbtn" id="administrativoDropdown">Escolha o departamento</button>
+                <div class="dropdown-content">
+                    <a data-sigla="RH">RH</a>
+                    <a data-sigla="RH">Manutenção</a>
+                    <a data-sigla="MN">Almox</a>
+                    <a data-sigla="ADM">Administrativo</a>
+                </div>
+            </nav>
+        </header>
+        <main>
+            <div id="ilhas"></div> <!-- Aqui serão inseridas as ilhas e seus respectivos postos -->
+        </main>
+        <div id="mapa">
+            <img src="m_adm.svg" id="mapaImagem">
+        </div>
+  
+        <div id="agendamentoModal" class="modal">
+            <div class="modal-content">
+              <span id="fecharModal" class="fechar-btn">&times;</span>
+              <form id="formAgendamento">
+                <!-- Seus campos de formulário aqui -->
+                <label for="nomeCompleto">Nome Completo:</label>
+                <input type="text" id="nomeCompleto" name="nomeCompleto" required>
+          
+                <label for="matricula">Matrícula:</label>
+                <input type="text" id="matricula" name="matricula" required>
+          
+                <label>AIU:</label>
+                <input type="text" id="aiu" required />
+                <label>Data de Início:</label>
+                <input type="date" id="dataInicio" required />
+                <label>Data de Fim:</label>
+                <input type="date" id="dataFim" required />
+                <label>Horário de Início:</label>
+                <input type="time" id="horarioInicio" required />
+                <label>Horário de Fim:</label>
+                <input type="time" id="horarioFim" required />
+                <button type="submit">Agendar</button>
+              </form>
+            </div>
+          </div>
+          
+
+<script src="script.js"></script>
+</body>
+
+</html>

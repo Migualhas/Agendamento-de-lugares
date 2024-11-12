@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Dados</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <h1>Gerenciamento de Dados</h1>
+    
+    <div>
+        <h2>Buscar Dados</h2>
+        <select id="table-select">
+            <option value="lugares">Lugares</option>
+            <option value="Contratante">Contratante</option>
+            <option value="Agendamentos">Agendamentos</option>
+        </select>
+        <input type="number" id="id-input" placeholder="ID (opcional para buscar todos)">
+        <button onclick="fetchData()">Buscar</button>
+    </div>
+    
+    <div id="result">
+        <h2>Resultados</h2>
+        <table id="result-table">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+
+    <div>
+        <h2>Remover Dados</h2>
+        <select id="delete-table-select">
+            <option value="lugares">Lugares</option>
+            <option value="Contratante">Contratante</option>
+            <option value="Agendamentos">Agendamentos</option>
+        </select>
+        <input type="number" id="delete-id-input" placeholder="ID do registro para remover">
+        <button onclick="deleteData()">Remover</button>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
