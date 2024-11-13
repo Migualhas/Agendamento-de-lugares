@@ -415,6 +415,34 @@ app.get('/check-matricula', (req, res) => {
   });
 });
 
+app.get('/agendamentos', (req, res) => {
+  const { matricula, aiu, nome_completo } = req.query;
+
+  let query = 'SELECT * FROM Agendamentos WHERE 1=1';
+  let params = [];
+
+  if (matricula) {
+      query += ' AND contratante_matricula = ?';
+      params.push(matricula);
+  }
+  if (aiu) {
+      query += ' AND aiu = ?';
+      params.push(aiu);
+  }
+  if (nome_completo) {
+      query += ' AND nome_completo = ?';
+      params.push(nome_completo);
+  }
+
+  db.all(query, params, (err, rows) => {
+      if (err) {
+          console.error(err.message);
+          res.status(500).send('Erro ao buscar agendamentos');
+          return;
+      }
+      res.json(rows);
+  });
+});
 
 
 // Rota para a página de administração
@@ -426,6 +454,12 @@ app.get('/admin', (req, res) => {
 app.get('/lugares', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'cadastros.html'));
 });
+
+// Rota para a página de administração
+app.get('/verificar', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'verificar.html'));
+});
+
 
 // Iniciar o servidor
 const PORT = process.env.PORT || 3000;

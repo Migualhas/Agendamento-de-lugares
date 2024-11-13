@@ -10,19 +10,25 @@
     <div id="loading" class="loading">
         <p>Carregando...</p>
     </div>
-      
-        <header>
-            <img src="Logo.png" alt="Logo" id="logo">
-            <nav class="dropdown">
-                <button class="dropbtn" id="administrativoDropdown">Escolha o departamento</button>
-                <div class="dropdown-content">
-                    <a data-sigla="RH">RH</a>
-                    <a data-sigla="RH">Manutenção</a>
-                    <a data-sigla="MN">Almox</a>
-                    <a data-sigla="ADM">Administrativo</a>
-                </div>
-            </nav>
-        </header>
+    <header>
+        <img src="Logo.png" alt="Logo" id="logo">
+        <!-- Dropdown de departamento -->
+        <nav class="dropdown">
+            <button class="dropbtn" id="administrativoDropdown">Escolha o departamento</button>
+            <div class="dropdown-content">
+                <a data-sigla="RH">RH</a>
+                <a data-sigla="MT">Manutenção</a>
+                <a data-sigla="MN">Almox</a>
+                <a data-sigla="ADM">Administrativo</a>
+            </div>
+        </nav>
+        <nav>
+            <a href="/verificar" class="varificar">Verifique seu agendamento</a>
+        </nav>
+        
+    </header>
+    
+    
         <main>
             <div id="ilhas"></div> <!-- Aqui serão inseridas as ilhas e seus respectivos postos -->
         </main>

@@ -73,3 +73,27 @@ function deleteData() {
             console.error('Erro ao remover dados:', error);
         });
 }
+document.getElementById('upload-form').addEventListener('submit', function (event) {
+    event.preventDefault(); // Evitar o envio padrão do formulário
+
+    const formData = new FormData(this);
+
+    fetch('/importar-postos', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao importar dados.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById('message').textContent = data.message;
+        document.getElementById('message').style.color = 'green';
+    })
+    .catch(error => {
+        document.getElementById('message').textContent = error.message;
+        document.getElementById('message').style.color = 'red';
+    });
+});
