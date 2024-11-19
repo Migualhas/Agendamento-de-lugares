@@ -5,6 +5,7 @@ database.db
 layout.svg
 package-lock.json
 package.json
+
 # Logs
 logs/
 *.log
