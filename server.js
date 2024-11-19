@@ -20,14 +20,17 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+const HOST_EMAIL = process.env.HOST_EMAIL;
+
 let transporter = nodemailer.createTransport({
-  host: 'mail.mailrouter.net',
+  host: HOST_EMAIL,
   port: 25,
-  secure: false, // true for 465, false for other ports
+  secure: false,
   tls: {
     rejectUnauthorized: false
-  },
+  }
 });
+
 
 // Conexão com o banco de dados SQLite
 let db = new sqlite3.Database('./database.db', (err) => {
