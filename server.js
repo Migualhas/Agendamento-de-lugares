@@ -20,14 +20,17 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
+const HOST_EMAIL = process.env.HOST_EMAIL;
+
 let transporter = nodemailer.createTransport({
-  host: 'mail.mailrouter.net',
+  host: HOST_EMAIL,
   port: 25,
-  secure: false, // true for 465, false for other ports
+  secure: false,
   tls: {
     rejectUnauthorized: false
-  },
+  }
 });
+
 
 // Conexão com o banco de dados SQLite
 let db = new sqlite3.Database('./database.db', (err) => {
@@ -100,7 +103,6 @@ app.post('/insert/:table', (req, res) => {
     res.json({ lastID: this.lastID });
   });
 });
-
 
 app.put('/update/:table/:id', (req, res) => {
   let table = req.params.table;
@@ -198,7 +200,6 @@ app.post('/importar-postos', async (req, res) => {
   }
 });
 
-
 // Rota para enviar e-mail de confirmação
 app.post('/sendEmail', (req, res) => {
   const { posto, aiu, data_inicio, data_fim, ilha, nome_completo } = req.body;
@@ -231,7 +232,6 @@ app.post('/sendEmail', (req, res) => {
     res.json({ message: 'E-mail de confirmação enviado com sucesso!' });
   });
 });
-
 
 
 
@@ -415,6 +415,34 @@ app.get('/check-matricula', (req, res) => {
   });
 });
 
+app.get('/agendamentos', (req, res) => {
+  const { matricula, aiu, nome_completo } = req.query;
+
+  let query = 'SELECT * FROM Agendamentos WHERE 1=1';
+  let params = [];
+
+  if (matricula) {
+      query += ' AND contratante_matricula = ?';
+      params.push(matricula);
+  }
+  if (aiu) {
+      query += ' AND aiu = ?';
+      params.push(aiu);
+  }
+  if (nome_completo) {
+      query += ' AND nome_completo = ?';
+      params.push(nome_completo);
+  }
+
+  db.all(query, params, (err, rows) => {
+      if (err) {
+          console.error(err.message);
+          res.status(500).send('Erro ao buscar agendamentos');
+          return;
+      }
+      res.json(rows);
+  });
+});
 
 
 // Rota para a página de administração
@@ -426,6 +454,12 @@ app.get('/admin', (req, res) => {
 app.get('/lugares', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'cadastros.html'));
 });
+
+// Rota para a página de administração
+app.get('/verificar', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'verificar.html'));
+});
+
 
 // Iniciar o servidor
 const PORT = process.env.PORT || 3000;

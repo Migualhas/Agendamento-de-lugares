@@ -38,7 +38,13 @@
         <input type="number" id="delete-id-input" placeholder="ID do registro para remover">
         <button onclick="deleteData()">Remover</button>
     </div>
-
+    <h1>Importar Arquivo Excel para Postos</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <label for="file">Selecione o arquivo Excel:</label>
+        <input type="file" id="file" name="file" accept=".xlsx" required>
+        <button type="submit">Enviar</button>
+    </form>
+    <div class="message" id="message"></div>
     <script src="admin.js"></script>
 </body>
 </html>

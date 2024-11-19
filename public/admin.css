@@ -15,3 +15,76 @@ th {
 button {
     margin-top: 10px;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+h1 {
+    color: #333;
+}
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+input[type="file"] {
+    margin: 10px 0;
+}
+button {
+    padding: 10px 15px;
+    background: #5cb85c;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button:hover {
+    background: #4cae4c;
+}
+.message {
+    margin-top: 20px;
+    color: #d9534f;
+}
+
+
+.container {
+    width: 80%;
+    margin: 50px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #285943;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+ 

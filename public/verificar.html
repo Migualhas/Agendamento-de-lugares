@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Agendamentos</title>
+    <style> 
+    
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #D7FFF1;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #285943;
+        }
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            color: #285943;
+        }
+        input[type="text"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: #65C446;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #77AF9C;
+        }
+        .appointments {
+            margin-top: 20px;
+        }
+        .appointments table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .appointments th, .appointments td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .appointments th {
+            background-color: #B3EAD6;
+            text-align: left;
+            color: #285943;
+        }
+        .appointments tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .appointments tr:hover {
+            background-color: #ddd;
+        }
+        header {
+            background-color: #285943; /* Cor de fundo que combina com o esquema de cores */
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header div {
+            display: inline-block;
+            background-color: #B3EAD6; /* Fundo mais claro para destacar */
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        header a {
+            font-family: Arial, sans-serif; /* Fonte consistente com o resto */
+            font-size: 16px;
+            color: #285943; /* Cor escura para o texto */
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header a:hover {
+            background-color: #65C446; /* Cor de fundo verde suave ao passar o mouse */
+            color: white; /* Texto branco no hover */
+        }
+
+        header a:active {
+            background-color: #77AF9C; /* Cor de fundo ao clicar */
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <a href="/"> <i class="fas fa-undo"></i> Retorna a página inicial</a>
+        </div>
+    </header>
+    
+    <div class="container">
+        <h1>Verificação de Agendamentos</h1>
+        
+        <form id="appointmentForm">
+            <label for="fullName">Nome Completo:</label>
+            <input type="text" id="fullName" name="fullName" required>
+            
+            <label for="aiu">AIU:</label>
+            <input type="text" id="aiu" name="aiu" required>
+            
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" required>
+            
+            <input type="submit" value="Verificar Agendamentos">
+        </form>
+        <div class="appointments" id="appointments">
+            <!-- Os agendamentos serão exibidos aqui -->
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('appointmentForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const fullName = document.getElementById('fullName').value;
+            const aiu = document.getElementById('aiu').value;
+            const matricula = document.getElementById('matricula').value;
+            const appointmentsDiv = document.getElementById('appointments');
+
+            fetch(`/agendamentos?matricula=${matricula}&aiu=${aiu}&nome_completo=${fullName}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.length > 0) {
+                        let appointmentsTable = `
+                            <table>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Posto</th>
+                                    <th>Ilha</th>
+                                    <th>Data Início</th>
+                                    <th>Hora Início</th>
+                                    <th>Data Fim</th>
+                                    <th>Hora Fim</th>
+                                </tr>`;
+                        data.forEach(appointment => {
+                            appointmentsTable += `
+                                <tr>
+                                    <td>${appointment.id_Agendamentos}</td>
+                                    <td>${appointment.posto}</td>
+                                    <td>${appointment.ilha}</td>
+                                    <td>${appointment.data_inicio}</td>
+                                    <td>${appointment.horario_inicio}</td>
+                                    <td>${appointment.data_fim}</td>
+                                    <td>${appointment.horario_fim}</td>
+                                </tr>`;
+                        });
+                        appointmentsTable += '</table>';
+                        appointmentsDiv.innerHTML = `<p>Agendamentos para ${fullName} (AIU: ${aiu}, Matrícula: ${matricula}):</p>${appointmentsTable}`;
+                    } else {
+                        appointmentsDiv.innerHTML = `<p>Não foram encontrados agendamentos para ${fullName} (AIU: ${aiu}, Matrícula: ${matricula}).</p>`;
+                    }
+                })
+                .catch(error => {
+                    console.error('Erro ao buscar agendamentos:', error);
+                    appointmentsDiv.innerHTML = `<p>Erro ao buscar agendamentos. Por favor, tente novamente mais tarde.</p>`;
+                });
+        });
+    </script>
+</body>
+</html>

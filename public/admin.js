@@ -1,3 +1,4 @@
+
 // Função para buscar dados
 function fetchData() {
     const table = document.getElementById('table-select').value;
@@ -73,3 +74,51 @@ function deleteData() {
             console.error('Erro ao remover dados:', error);
         });
 }
+document.getElementById('upload-form').addEventListener('submit', function (event) {
+    event.preventDefault(); // Evitar o envio padrão do formulário
+
+    const formData = new FormData(this);
+
+    fetch('/importar-postos', {
+        method: 'POST',
+        body: formData,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao importar dados.');
+        }
+        return response.json();
+    })
+    .then(data => {
+        document.getElementById('message').textContent = data.message;
+        document.getElementById('message').style.color = 'green';
+    })
+    .catch(error => {
+        document.getElementById('message').textContent = error.message;
+        document.getElementById('message').style.color = 'red';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/select/Agendamentos')
+        .then(response => response.json())
+        .then(data => {
+            const tableBody = document.querySelector('#agendamentosTable tbody');
+            data.forEach(agendamento => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${agendamento.id}</td>
+                    <td>${agendamento.posto}</td>
+                    <td>${agendamento.ilha}</td>
+                    <td>${agendamento.contratante_matricula}</td>
+                    <td>${agendamento.data_inicio}</td>
+                    <td>${agendamento.data_fim}</td>
+                    <td>${agendamento.horario_inicio}</td>
+                    <td>${agendamento.horario_fim}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Erro ao buscar agendamentos:', error));
+});
+

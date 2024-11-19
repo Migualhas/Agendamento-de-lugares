@@ -3,6 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" type="image/x-icon" href="favicon_io/favicon.ico">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+
+
     <title>Home Desk</title>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -10,19 +17,25 @@
     <div id="loading" class="loading">
         <p>Carregando...</p>
     </div>
-      
-        <header>
-            <img src="Logo.png" alt="Logo" id="logo">
-            <nav class="dropdown">
-                <button class="dropbtn" id="administrativoDropdown">Escolha o departamento</button>
-                <div class="dropdown-content">
-                    <a data-sigla="RH">RH</a>
-                    <a data-sigla="RH">Manutenção</a>
-                    <a data-sigla="MN">Almox</a>
-                    <a data-sigla="ADM">Administrativo</a>
-                </div>
-            </nav>
-        </header>
+    <header>
+        <a href="/"><img src="Logo.png" alt="Logo" id="logo"></a>
+        <!-- Dropdown de departamento -->
+        <nav class="dropdown">
+            <button class="dropbtn" id="administrativoDropdown">Escolha o departamento &#9660;</button>
+            <div class="dropdown-content">
+                <a data-sigla="RH"><i class="fas fa-user"></i>RH</a>
+                <a data-sigla="MT"><i class="fas fa-tools"></i>Manutenção</a>
+                <a data-sigla="MN"><i class="fas fa-warehouse"></i>Almoxarifado</a>
+                <a data-sigla="ADM"><i class="fas fa-briefcase"></i>Administração</a>
+            </div>
+        </nav>
+        <nav>
+            <a href="/verificar" class="varificar">Verifique seu agendamento <i class="fas fa-question-circle"></i></a>
+        </nav>
+        
+    </header>
+    
+    
         <main>
             <div id="ilhas"></div> <!-- Aqui serão inseridas as ilhas e seus respectivos postos -->
         </main>
