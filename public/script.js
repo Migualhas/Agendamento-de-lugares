@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Encontra o texto correspondente à sigla armazenada e atualiza o botão e imagem
     const selecionado = document.querySelector(`.dropdown-content a[data-sigla="${siglaSelecionada}"]`);
-    administrativoDropdown.textContent = selecionado ? selecionado.textContent : "⬇ Administrativo";
+    administrativoDropdown.innerHTML = selecionado ? selecionado.innerHTML + " &#9660;" : "⬇ Administrativo";
     mapaImagem.src = `m_${siglaSelecionada.toLowerCase()}.svg`;
 
     carregarPostos(); // Carrega os postos com a sigla selecionada
@@ -23,7 +23,7 @@ document.querySelectorAll(".dropdown-content a").forEach(item => {
 
         // Atualiza o texto do botão dropdown com o item selecionado
         const administrativoDropdown = document.getElementById("administrativoDropdown");
-        administrativoDropdown.textContent = item.textContent;
+        administrativoDropdown.innerHTML = item.innerHTML + " &#9660;";
 
         // Atualiza a imagem no div "mapa" com base na sigla selecionada
         const mapaImagem = document.getElementById("mapaImagem");
@@ -33,7 +33,6 @@ document.querySelectorAll(".dropdown-content a").forEach(item => {
         carregarPostos();
     });
 });
-
 async function carregarPostos() {
     try {
         const response = await fetch('/select/lugares');

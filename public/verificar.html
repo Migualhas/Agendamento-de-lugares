@@ -65,11 +65,53 @@
         .appointments tr:hover {
             background-color: #ddd;
         }
+        header {
+            background-color: #285943; /* Cor de fundo que combina com o esquema de cores */
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        header div {
+            display: inline-block;
+            background-color: #B3EAD6; /* Fundo mais claro para destacar */
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        header a {
+            font-family: Arial, sans-serif; /* Fonte consistente com o resto */
+            font-size: 16px;
+            color: #285943; /* Cor escura para o texto */
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        header a:hover {
+            background-color: #65C446; /* Cor de fundo verde suave ao passar o mouse */
+            color: white; /* Texto branco no hover */
+        }
+
+        header a:active {
+            background-color: #77AF9C; /* Cor de fundo ao clicar */
+        }
+
+
     </style>
 </head>
 <body>
+    <header>
+        <div>
+            <a href="/"> <i class="fas fa-undo"></i> Retorna a página inicial</a>
+        </div>
+    </header>
+    
     <div class="container">
         <h1>Verificação de Agendamentos</h1>
+        
         <form id="appointmentForm">
             <label for="fullName">Nome Completo:</label>
             <input type="text" id="fullName" name="fullName" required>
@@ -86,7 +128,7 @@
             <!-- Os agendamentos serão exibidos aqui -->
         </div>
     </div>
-
+    
     <script>
         document.getElementById('appointmentForm').addEventListener('submit', function(event) {
             event.preventDefault();
