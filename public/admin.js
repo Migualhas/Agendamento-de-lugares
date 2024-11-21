@@ -97,6 +97,7 @@ document.getElementById('upload-form').addEventListener('submit', function (even
         document.getElementById('message').textContent = error.message;
         document.getElementById('message').style.color = 'red';
     });
+<<<<<<< HEAD
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -122,3 +123,6 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => console.error('Erro ao buscar agendamentos:', error));
 });
 
+=======
+});
+>>>>>>> d56ee4b08fa0a126e2f64670283b334dec244c26

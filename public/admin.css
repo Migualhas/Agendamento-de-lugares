@@ -47,6 +47,7 @@ button:hover {
 .message {
     margin-top: 20px;
     color: #d9534f;
+<<<<<<< HEAD
 }
 
 
@@ -88,3 +89,6 @@ tr:nth-child(even) {
 }
 
  
+=======
+}
+>>>>>>> d56ee4b08fa0a126e2f64670283b334dec244c26
